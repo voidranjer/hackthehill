@@ -40,7 +40,15 @@ fps = FPS().start()
 
 
 # loop over the frames from the video stream
+skipframes_counter = 0
 while True:
+    # skip frames to improve speed
+    skipframes_counter += 1
+    if (skipframes_counter % 5 != 0):
+        if (skipframes_counter > 1000000):
+            skipframes_counter = 0
+        continue
+
     # grab the frame from the threaded video stream and resize it
     # to have a maximum width of 400 pixels
     frame = vs.read()
