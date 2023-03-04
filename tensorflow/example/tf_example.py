@@ -10,6 +10,7 @@ import json
 import numpy as np
 from threading import Lock
 import cv2
+from PIL import Image
 
 # printing only warnings and error messages
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "1"
@@ -158,7 +159,8 @@ def main(predictor):
             cv2.destroyAllWindows()
             break
 
-        print(predictor(frame))
+        results = predictor(Image.fromarray(frame))
+        print(results["predictions"][0]["label"])
 
 
 if __name__ == "__main__":
@@ -167,11 +169,12 @@ if __name__ == "__main__":
     # parser.add_argument("image", help="Path to your image file.")
     # args = parser.parse_args()
     dir_path = os.getcwd()
+    model = TFModel(dir_path=dir_path)
+    main(model.predict)
 
     # if os.path.isfile(args.image):
     #     image = Image.open(args.image)
     #     model = TFModel(dir_path=dir_path)
-    #     main(model.predict)
     # outputs = model.predict(image)
     # print(f"Predicted: {outputs}")
     # else:
