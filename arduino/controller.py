@@ -23,7 +23,7 @@ async def listen():
                 led1()
             elif res == "metal":
                 led2()
-            elif res == "carboard":
+            elif res == "cardboard":
                 led3()
             elif res == "landfill":
                 led4()
@@ -56,7 +56,7 @@ def led3():
 
 def led4():
     ledOff()
-    ser.write(b'3')
+    ser.write(b'4')
     # make sure to add sound files
 
 def ledOff():
