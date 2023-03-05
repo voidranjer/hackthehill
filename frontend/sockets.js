@@ -15,11 +15,13 @@ socket.addEventListener("message", (event) => {
 
   console.log("Message from server ", data);
 
-  if (data === "gatorade") {
-    element.src = "BottomLeft.png";
-  } else if (data === "popcorners") {
-    element.src = "BottomRight.png";
-  } else if (data === "gingerale") {
-    element.src = "Bottom.png";
+  if (data === "landfill") {
+    element.src = "first.png";
+  } else if (data === "metal") {
+    element.src = "second.png";
+  } else if (data === "plastic") {
+    element.src = "third.png";
+  } else if (data === "cardboard") {
+    element.src = "fourth.png";
   }
 });
