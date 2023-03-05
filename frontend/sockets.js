@@ -23,5 +23,7 @@ socket.addEventListener("message", (event) => {
     element.src = "third.png";
   } else if (data === "cardboard") {
     element.src = "fourth.png";
+  } else if (data === "nothing") {
+    element.src = "nothing.png";
   }
 });
