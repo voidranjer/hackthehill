@@ -29,18 +29,21 @@ async def listen():
 
 def led1():
     ser.write(b'1')
-    # play_file("file:///paper.mp3")
-
+    play_file("file:///hack_the_hill_left_en.wav")
+    play_file("file:///hack_the_hill_left_fr.wav")
+    play_file("file:///hack_the_hill_left_cn.wav")
 
 def led2():
     ser.write(b'2')
-    # play_file("file:///softPlastic.mp3")
-
+    play_file("file:///hack_the_hill_right_en.wav")
+    play_file("file:///hack_the_hill_right_fr.wav")
+    play_file("file:///hack_the_hill_right_cn.wav")
 
 def led3():
     ser.write(b'3')
-    # play_file("file:///hardPlastic.mp3")
-
+    play_file("file:///hack_the_hill_middle_en.wav")
+    play_file("file:///hack_the_hill_middle_fr.wav")
+    play_file("file:///hack_the_hill_middle_cn.wav")
 
 # function to play a file
 def play_file(file):
