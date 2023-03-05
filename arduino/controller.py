@@ -19,13 +19,13 @@ async def listen():
             res = await websocket.recv()
             print(f"> {res}")
 
-            if res == "plastic":
+            if res == "landfill":
                 led1()
             elif res == "metal":
                 led2()
-            elif res == "cardboard":
+            elif res == "plastic":
                 led3()
-            elif res == "landfill":
+            elif res == "cardboard":
                 led4()
             elif res == "nothing":
                 ledOff()
@@ -36,28 +36,22 @@ async def listen():
 def led1():
     ledOff()
     ser.write(b'1')
-    play_file("file:///hack_the_hill_left_en.wav")
-    play_file("file:///hack_the_hill_left_fr.wav")
-    play_file("file:///hack_the_hill_left_cn.wav")
+    play_file("file:///first.mp3")
 
 def led2():
     ledOff()
     ser.write(b'2')
-    play_file("file:///hack_the_hill_right_en.wav")
-    play_file("file:///hack_the_hill_right_fr.wav")
-    play_file("file:///hack_the_hill_right_cn.wav")
+    play_file("file:///second.mp3")
 
 def led3():
     ledOff()
     ser.write(b'3')
-    play_file("file:///hack_the_hill_middle_en.wav")
-    play_file("file:///hack_the_hill_middle_fr.wav")
-    play_file("file:///hack_the_hill_middle_cn.wav")
+    play_file("file:///third.mp3")
 
 def led4():
     ledOff()
     ser.write(b'4')
-    # make sure to add sound files
+    play_file("file:///fourth.mp3")
 
 def ledOff():
     ser.write(b'5')
