@@ -1,39 +1,39 @@
-from PIL import Image
-import time
 import cv2
-import os
+import time
 
+# Open the default camera
+cap = cv2.VideoCapture(0)
 
-# Initialize webcam
-webcam = cv2.VideoCapture(0)
+# Define a counter for naming the image files
+count = 0
 
-# Change the current directory to specified directory
-directory = "/Users/meekranjer/Documents/git/hackthehill/training/images"
-os.chdir(directory)
+# Start the timer
+start_time = time.time()
 
-counter = 0
-
+# Start capturing and saving images every 1 second
 while True:
-    counter += 1
-    time.sleep(1)
+    # Capture frame-by-frame
+    ret, frame = cap.read()
+    cv2.imshow("Capturing", frame)
+    key = cv2.waitKey(1)
 
-    try:
-        check, frame = webcam.read()
-        print("Captured frame")
+    # If frame is read correctly, save to file
+    if ret:
+        # Construct the filename with the current timestamp
+        filename = f"images/image_{count}.jpg"
 
-        cv2.imshow("Capturing", frame)
-        key = cv2.waitKey(1)
+        # Save the frame as a JPEG image
+        cv2.imwrite(filename, frame)
 
-        # break
-        if key == ord('q'):
-            webcam.release()
-            cv2.destroyAllWindows()
-            break
+        # Increment the counter
+        count += 1
 
-    except(KeyboardInterrupt):
-        webcam.release()
-        cv2.destroyAllWindows()
+    # Wait for 1 second before capturing the next frame
+    time.sleep(0.2)
+
+    # Stop capturing after 5 seconds
+    if time.time() - start_time > 5000:
         break
 
-    image = Image.fromarray(frame)
-    cv2.imwrite(f"{counter}-training.jpg", image)
+# Release the camera
+cap.release()
