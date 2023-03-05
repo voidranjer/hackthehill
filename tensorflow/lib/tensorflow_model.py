@@ -1,26 +1,12 @@
-#  -------------------------------------------------------------
-#   Copyright (c) Microsoft Corporation.  All rights reserved.
-#  -------------------------------------------------------------
 """
 Skeleton code showing how to load and run the TensorFlow SavedModel export package from Lobe.
 """
-# import argparse
-import os
+import tensorflow as tf
 import json
 import numpy as np
 from threading import Lock
-import cv2
 from PIL import Image
-
-# printing only warnings and error messages
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "1"
-
-try:
-    import tensorflow as tf
-    from PIL import Image
-except ImportError:
-    raise ImportError(
-        "ERROR: Failed to import libraries. Please refer to READEME.md file\n")
+import os
 
 EXPORT_MODEL_VERSION = 1
 
@@ -112,70 +98,3 @@ class TFModel:
         sorted_output = {"predictions": sorted(
             output, key=lambda k: k["confidence"], reverse=True)}
         return sorted_output
-
-
-def main(predictor):
-    key = cv2. waitKey(1)
-    webcam = cv2.VideoCapture(0)
-    while True:
-        try:
-            check, frame = webcam.read()
-            # print(check) #prints true as long as the webcam is running
-            # print(frame) #prints matrix values of each framecd
-            cv2.imshow("Capturing", frame)
-            key = cv2.waitKey(1)
-            # if key == ord('s'):
-            #     cv2.imwrite(filename='saved_img.jpg', img=frame)
-            #     webcam.release()
-            #     img_new = cv2.imread('saved_img.jpg', cv2.IMREAD_GRAYSCALE)
-            #     img_new = cv2.imshow("Captured Image", img_new)
-            #     cv2.waitKey(1650)
-            #     cv2.destroyAllWindows()
-            #     print("Processing image...")
-            #     img_ = cv2.imread('saved_img.jpg', cv2.IMREAD_ANYCOLOR)
-            #     print("Converting RGB image to grayscale...")
-            #     gray = cv2.cvtColor(img_, cv2.COLOR_BGR2GRAY)
-            #     print("Converted RGB image to grayscale...")
-            #     print("Resizing image to 28x28 scale...")
-            #     img_ = cv2.resize(gray,(28,28))
-            #     print("Resized...")
-            #     img_resized = cv2.imwrite(filename='saved_img-final.jpg', img=img_)
-            #     print("Image saved!")
-
-            #     break
-            if key == ord('q'):
-                print("Turning off camera.")
-                webcam.release()
-                print("Camera off.")
-                print("Program ended.")
-                cv2.destroyAllWindows()
-                break
-
-        except(KeyboardInterrupt):
-            print("Turning off camera.")
-            webcam.release()
-            print("Camera off.")
-            print("Program ended.")
-            cv2.destroyAllWindows()
-            break
-
-        results = predictor(Image.fromarray(frame))
-        print(results["predictions"][0]["label"])
-
-
-if __name__ == "__main__":
-    # parser = argparse.ArgumentParser(
-    #     description="Predict a label for an image.")
-    # parser.add_argument("image", help="Path to your image file.")
-    # args = parser.parse_args()
-    dir_path = os.getcwd()
-    model = TFModel(dir_path=dir_path)
-    main(model.predict)
-
-    # if os.path.isfile(args.image):
-    #     image = Image.open(args.image)
-    #     model = TFModel(dir_path=dir_path)
-    # outputs = model.predict(image)
-    # print(f"Predicted: {outputs}")
-    # else:
-    #     print(f"Couldn't find image file {args.image}")
