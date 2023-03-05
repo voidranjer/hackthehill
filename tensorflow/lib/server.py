@@ -14,6 +14,7 @@ HOST = "0.0.0.0"
 CONNECTIONS = set()
 
 CONFIDENCE_THRESH = 0.8
+BUFFER_SIZE = 15
 
 
 async def register(websocket):
@@ -37,6 +38,11 @@ async def tensorflow_detection():
     webcam = cv2.VideoCapture(0)
 
     prev_highest_label = None
+
+    # Buffer queue
+    buffer_queue = [None for i in range(BUFFER_SIZE)]
+    counter = 0
+
     while True:
         try:
             check, frame = webcam.read()
@@ -64,15 +70,25 @@ async def tensorflow_detection():
         highest_label = most_confident_result["label"]
         highest_confidence = most_confident_result["confidence"]
 
-        # Send a message to the client if the highest confidence has changed (and is above threshold)
-        if (highest_label != prev_highest_label and highest_confidence > CONFIDENCE_THRESH):
-            websockets.broadcast(CONNECTIONS, highest_label)
-            print(
-                f"Sent message to {len(CONNECTIONS)} clients: {highest_label}")
+        if (counter < BUFFER_SIZE):
+            buffer_queue[counter] = highest_label
+            counter += 1
+        else:
+            counter = 0
+            buffer_queue[0] = highest_label
 
-        prev_highest_label = highest_label
+            current_highest_label = max(buffer_queue,key=buffer_queue.count)
+
+            # Send a message to the client if the highest confidence has changed (and is above threshold)
+            if (current_highest_label != prev_highest_label and highest_confidence > CONFIDENCE_THRESH):
+            # if (current_highest_label != prev_highest_label and highest_confidence > CONFIDENCE_THRESH):
+                websockets.broadcast(CONNECTIONS, current_highest_label)
+                print(
+                    f"Sent message to {len(CONNECTIONS)} clients: {current_highest_label}")
+
+            prev_highest_label = current_highest_label
         # Delay required otherwise websocket server will not receive connections
-        await asyncio.sleep(1)
+        await asyncio.sleep(0.01)
 
 
 async def test_server():
