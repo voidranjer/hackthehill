@@ -1,4 +1,4 @@
-const URI = "ws://172.20.10.2:8765";
+const URI = "ws://172.20.10.7:8765";
 
 // Create WebSocket connection.
 const socket = new WebSocket(URI);
