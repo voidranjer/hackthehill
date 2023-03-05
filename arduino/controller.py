@@ -9,7 +9,7 @@ import serial
 
 URI = "ws://172.20.10.2:8765"
 
-ser = serial.Serial('COM4', 9800, timeout=1)
+ser = serial.Serial('COM3', 9800, timeout=1)
 time.sleep(2)
 
 
