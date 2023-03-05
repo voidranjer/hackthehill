@@ -19,12 +19,16 @@ async def listen():
             res = await websocket.recv()
             print(f"> {res}")
 
-            if res == "gatorade":
+            if res == "plastic":
                 led1()
-            elif res == "popcorners":
+            elif res == "metal":
                 led2()
-            elif res == "gingerale":
+            elif res == "carboard":
                 led3()
+            elif res == "landfill":
+                led4()
+            elif res == "nothing":
+                ledOff()
 
             await asyncio.sleep(1)
 
