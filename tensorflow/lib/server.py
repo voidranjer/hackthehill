@@ -34,7 +34,6 @@ async def tensorflow_detection():
     model = TFModel(dir_path=dir_path)
 
     # Capture webcam footage
-    key = cv2. waitKey(1)
     webcam = cv2.VideoCapture(0)
 
     prev_highest_label = None
