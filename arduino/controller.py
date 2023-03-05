@@ -1,5 +1,5 @@
 import time
-import vlc
+#import vlc
 import asyncio
 import websockets
 import serial
