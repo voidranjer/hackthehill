@@ -30,22 +30,33 @@ async def listen():
 
 
 def led1():
+    ledOff()
     ser.write(b'1')
     play_file("file:///hack_the_hill_left_en.wav")
     play_file("file:///hack_the_hill_left_fr.wav")
     play_file("file:///hack_the_hill_left_cn.wav")
 
 def led2():
+    ledOff()
     ser.write(b'2')
     play_file("file:///hack_the_hill_right_en.wav")
     play_file("file:///hack_the_hill_right_fr.wav")
     play_file("file:///hack_the_hill_right_cn.wav")
 
 def led3():
+    ledOff()
     ser.write(b'3')
     play_file("file:///hack_the_hill_middle_en.wav")
     play_file("file:///hack_the_hill_middle_fr.wav")
     play_file("file:///hack_the_hill_middle_cn.wav")
+
+def led4():
+    ledOff()
+    ser.write(b'3')
+    # make sure to add sound files
+
+def ledOff():
+    ser.write(b'5')
 
 # function to play a file
 def play_file(file):
