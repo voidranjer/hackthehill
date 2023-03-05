@@ -78,15 +78,15 @@ async def tensorflow_detection():
 
 async def test_server():
     while True:
-        websockets.broadcast(CONNECTIONS, "gatorade")
+        websockets.broadcast(CONNECTIONS, "popcorners")
         print("Broadcasting...")
         await asyncio.sleep(1)
 
 
 async def main():
     async with websockets.serve(register, HOST, WEBSOCKETS_PORT):
-        # await tensorflow_detection()
-        await test_server()
+        await tensorflow_detection()
+        # await test_server()
 
 if __name__ == "__main__":
     asyncio.run(main())
