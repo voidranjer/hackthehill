@@ -36,7 +36,7 @@ async def tensorflow_detection():
     key = cv2. waitKey(1)
     webcam = cv2.VideoCapture(0)
 
-    prev_highest_confidence = None
+    prev_highest_label = None
     while True:
         try:
             check, frame = webcam.read()

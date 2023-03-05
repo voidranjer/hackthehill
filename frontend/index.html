@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UI Interface</title>
+    <link rel="stylesheet" href="QualityOfLife.css" />
+    <script type="text/javascript" src="sockets.js"></script>
+  </head>
+
+  <body>
+    <div class="imgbox">
+      <img id="myImage" src="BottomRight.png" class="center-fit" />
+    </div>
+
+    <button onclick="document.getElementById('myImage').src='BottomLeft.png'">
+      Bottom Left
+    </button>
+    <button onclick="document.getElementById('myImage').src='Bottom.png'">
+      Bottom
+    </button>
+    <button onclick="document.getElementById('myImage').src='BottomRight.png'">
+      Bottom Right
+    </button>
+  </body>
+</html>
