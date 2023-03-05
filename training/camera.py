@@ -29,7 +29,7 @@ while True:
         count += 1
 
     # Wait for 1 second before capturing the next frame
-    time.sleep(1)
+    time.sleep(0.2)
 
     # Stop capturing after 5 seconds
     if time.time() - start_time > 5000:
