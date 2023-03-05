@@ -1,7 +1,9 @@
-const int ledPin1 = 11;
-const int ledPin2 = 12;
-const int ledPin3 = 13;
-const int wait = 2000;
+
+const int ledPin1 = 10;
+const int ledPin2 = 11;
+const int ledPin3 = 12;
+const int ledPin4 = 13;
+const int wait = 1000;
 int incomingByte;      
 
 void setup() {
@@ -9,6 +11,7 @@ void setup() {
   pinMode(ledPin1, OUTPUT);
   pinMode(ledPin2, OUTPUT);
   pinMode(ledPin3, OUTPUT);
+  pinMode(ledPin4, OUTPUT);
 }
 
 void loop() {
@@ -16,16 +19,17 @@ void loop() {
     incomingByte = Serial.read();
     if (incomingByte == '1') {
       digitalWrite(ledPin1, HIGH);
-      delay(wait);
-      digitalWrite(ledPin1, LOW);
     }else if (incomingByte == '2') {
       digitalWrite(ledPin2, HIGH);
-      delay(wait);
-      digitalWrite(ledPin2, LOW);
     }else if (incomingByte == '3') {
       digitalWrite(ledPin3, HIGH);
-      delay(wait);
+    }else if (incomingByte == '4') {
+      digitalWrite(ledPin4, HIGH);
+    }else if (incomingByte == '5') {
+      digitalWrite(ledPin1, LOW);
+      digitalWrite(ledPin2, LOW);
       digitalWrite(ledPin3, LOW);
+      digitalWrite(ledPin4, LOW);
     }
   }
 }
