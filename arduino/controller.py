@@ -58,9 +58,9 @@ def ledOff():
 
 # function to play a file
 def play_file(file):
-    print("Playing")
+    #print("Playing")
     playsound(file)
-    print("Done")
+    #print("Done")
 
 
 # for i in range(2):
