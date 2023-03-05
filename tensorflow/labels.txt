@@ -1,4 +1,5 @@
-gatorade
-gingerale
+cardboard
+landfill
+metal
 nothing
-popcorners
+plastic
