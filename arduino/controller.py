@@ -5,7 +5,7 @@ import asyncio
 import websockets
 
 
-URI = "ws://localhost:8765"
+URI = "ws://172.20.10.2:8765"
 
 ser = serial.Serial('COM4', 9800, timeout=1)
 time.sleep(2)
@@ -16,6 +16,14 @@ async def listen():
         while True:
             res = await websocket.recv()
             print(f"> {res}")
+
+            if res == "gatorade":
+                led1()
+            elif res == "popcorners":
+                led2()
+            elif res == "gingerale":
+                led3()
+
             await asyncio.sleep(1)
 
 
