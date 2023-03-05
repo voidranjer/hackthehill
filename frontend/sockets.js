@@ -10,5 +10,16 @@ const socket = new WebSocket(URI);
 
 // Listen for messages
 socket.addEventListener("message", (event) => {
-  console.log("Message from server ", event.data);
+  const data = event.data;
+  const element = document.getElementById("myImage");
+
+  console.log("Message from server ", data);
+
+  if (data === "gatorade") {
+    element.src = "BottomLeft.png";
+  } else if (data === "popcorners") {
+    element.src = "BottomRight.png";
+  } else if (data === "gingerale") {
+    element.src = "Bottom.png";
+  }
 });

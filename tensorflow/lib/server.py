@@ -10,6 +10,7 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "1"
 
 # Store all connected clients in a set
 WEBSOCKETS_PORT = 8765
+HOST = "0.0.0.0"
 CONNECTIONS = set()
 
 CONFIDENCE_THRESH = 0.8
@@ -75,9 +76,17 @@ async def tensorflow_detection():
         await asyncio.sleep(1)
 
 
+async def test_server():
+    while True:
+        websockets.broadcast(CONNECTIONS, "gatorade")
+        print("Broadcasting...")
+        await asyncio.sleep(1)
+
+
 async def main():
-    async with websockets.serve(register, "localhost", WEBSOCKETS_PORT):
-        await tensorflow_detection()
+    async with websockets.serve(register, HOST, WEBSOCKETS_PORT):
+        # await tensorflow_detection()
+        await test_server()
 
 if __name__ == "__main__":
     asyncio.run(main())
