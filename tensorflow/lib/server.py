@@ -34,7 +34,6 @@ async def tensorflow_detection():
     model = TFModel(dir_path=dir_path)
 
     # Capture webcam footage
-    key = cv2. waitKey(1)
     webcam = cv2.VideoCapture(0)
 
     prev_highest_label = None
@@ -78,15 +77,15 @@ async def tensorflow_detection():
 
 async def test_server():
     while True:
-        websockets.broadcast(CONNECTIONS, "gatorade")
+        websockets.broadcast(CONNECTIONS, "popcorners")
         print("Broadcasting...")
         await asyncio.sleep(1)
 
 
 async def main():
     async with websockets.serve(register, HOST, WEBSOCKETS_PORT):
-        # await tensorflow_detection()
-        await test_server()
+        await tensorflow_detection()
+        # await test_server()
 
 if __name__ == "__main__":
     asyncio.run(main())

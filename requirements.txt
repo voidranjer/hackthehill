@@ -1,4 +1,4 @@
 websockets
 opencv-python
 python-vlc
-serial
+pyserial

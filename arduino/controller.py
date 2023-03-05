@@ -1,8 +1,10 @@
-import serial
 import time
 import vlc
 import asyncio
 import websockets
+import serial
+
+
 
 
 URI = "ws://172.20.10.2:8765"
